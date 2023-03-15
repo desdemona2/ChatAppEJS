@@ -1,0 +1,27 @@
+{
+  "name": "todo-list",
+  "version": "1.0.0",
+  "description": "A todo list based on Node",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/desdemona2/ChatAppEJS.git"
+  },
+  "author": "Bhavuk Sharma",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/desdemona2/ChatAppEJS/issues"
+  },
+  "homepage": "https://github.com/desdemona2/ChatAppEJS#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.21",
+    "path": "^0.12.7"
+  }
+}
