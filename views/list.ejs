@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <title>ToDo List</title>
+    </head>
+    <body>
+        <h1> <%= dayName %> </h1>
+        <ul>
+            <% items.forEach(item => { %>
+                <li> <%= item %> </li>
+            <% }); %>
+        </ul>
+        <form type="submit" action="/" method="post">
+            <label for="todo-item"><label>
+            <input type="text" id="todo-item" name="item" placeholder="Enter Task" autofocus />
+            <button type="submit">Add Item</button>
+        </form>
+    </body>
+    <footer>
+    </footer>
+</html>
