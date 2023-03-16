@@ -42,6 +42,11 @@ app.post("/work", (req, res) => {
     res.redirect("/work");
 });
 
+
+app.get("/about", (req, res) => {
+    res.render("about", {PageTitle: "About"});
+});
+
 const PORT = process.env.PORT || 5400;
 app.listen(PORT, () => {
     console.log("Server Running on port: " + PORT);
