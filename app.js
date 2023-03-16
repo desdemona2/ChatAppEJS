@@ -20,7 +20,7 @@ let currentDay = today.toLocaleDateString("en-US", options); // Saturday, Septem
 let items = [];
 
 app.get("/", (req, res) => {
-    res.render('list', {PageTitle:"Work Todo", title: currentDay, items: items, postPath: "/"});
+    res.render('list', {PageTitle:"Todo", title: currentDay, items: items, postPath: "/"});
 });
 
 app.post("/", (req, res) => {
