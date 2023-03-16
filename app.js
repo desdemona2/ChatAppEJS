@@ -20,13 +20,26 @@ let currentDay = today.toLocaleDateString("en-US", options); // Saturday, Septem
 let items = [];
 
 app.get("/", (req, res) => {
-    res.render('list', {dayName: currentDay, items: items});
+    res.render('list', {title: currentDay, items: items, postPath: "/"});
 });
 
 app.post("/", (req, res) => {
-    item = req.body.item;
+    let item = req.body.item;
     items.push(item);
     res.redirect("/");
+});
+
+
+let workItems = [];
+app.get("/work", (req, res) => {
+    res.render('list', {title: "Work Items", items: workItems, postPath: "/work"});
+});
+
+
+app.post("/work", (req, res) => {
+    let item = req.body.item;
+    workItems.push(item);
+    res.redirect("/work");
 });
 
 const PORT = process.env.PORT || 5400;

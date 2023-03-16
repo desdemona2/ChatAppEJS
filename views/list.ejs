@@ -8,7 +8,7 @@
     </head>
     <body>
         <div class="box" id="heading">
-            <h1> <%= dayName %> </h1>
+            <h1> <%= title %> </h1>
         </div>
 
         <div class="box">
@@ -20,13 +20,11 @@
                 <% }); %>
 
 
-            <form class="item" type="submit" action="/" method="post">
+                <form class="item" type="submit" action=<%= postPath %> method="post">
                 <input type="text" name="item" placeholder="Add Item" autofocus autocomplete="off"/>
                 <button type="submit">+</button>
             </form>
         </div>
 
     </body>
-    <footer>
-    </footer>
 </html>
