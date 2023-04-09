@@ -5,16 +5,18 @@
 
     <div class="box">
             <% items.forEach(item => { %>
-                <div class="item">
-                    <input type="checkbox">
-                    <p> <%= item %> </p>
-                </div>
+                <form type="submit" action="/delete" method="post">
+                    <div class="item">
+                        <input type="checkbox" name="checkbox" value="<%=item._id%>" onChange="this.form.submit()">
+                        <p> <%= item.title %> </p>
+                    </div>
+                </form>
             <% }); %>
 
 
-            <form class="item" type="submit" action=<%= postPath %> method="post">
+        <form class="item" type="submit" action=<%= postPath %> method="post">
             <input type="text" name="item" placeholder="Add Item" autofocus autocomplete="off"/>
-            <button type="submit">+</button>
+            <button type="submit" name="list">+</button>
         </form>
     </div>
 <%- include('footer'); -%>
