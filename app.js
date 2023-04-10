@@ -2,6 +2,8 @@
 const express = require('express');
 const parser = require('body-parser');
 const path = require('path');
+const _ = require('lodash')
+
 const date = require(path.join(__dirname, 'functions', 'date'));
 const insert = require(path.join(__dirname, 'functions', 'dbOperations'))
 
@@ -110,7 +112,8 @@ app.get("/about", (req, res) => {
 });
 
 app.get("/:list_name", (req, res) => {
-    const list_name = req.params.list_name;
+    // to make list name with only 1st character capitalized
+    const list_name = _.capitalize(req.params.list_name);
 
     lists.findOne({name: list_name}).then(async function (result) {
         if (result && result.length !== 0) {
@@ -155,14 +158,38 @@ app.post("/:list_name", (req, res) => {
         await items.push(new item({
             title: req.body.item
         }));
+        doc.save().then(result => {
+            res.redirect(`/${list_name}`)
+        }).catch(err => {
+            if (err.name === "ValidationError") {
+                for (field in err.errors) {
+                    const msg = err.errors[field].message
+                    console.log("Some Error occured: " + msg)
+                    res.status(400)
+                    return res.send(`<h1>${msg}</h1>`) 
+                }
+            }
+        });
 
-        doc.save();
-        res.redirect(`/${list_name}`)
     }).catch(err => {
         console.log("Some error occured while inserting! " + err);
     })
 });
 
+app.post("/delete/:list_name", async function (req, res) {
+    const list_name = req.params.list_name;
+    const id = req.body.checkbox;
+
+    const doc = await lists.findOneAndUpdate(
+        {name: list_name}, 
+        {$pull: {items: {_id: id}}}
+    ).then(async function(result) {
+        await result.save();
+        res.redirect(`/${list_name}`);
+    }).catch(err => {
+        console.log("Some error occured while deleting document! " + err);
+    })
+});
 
 const PORT = process.env.PORT || 5400;
 
